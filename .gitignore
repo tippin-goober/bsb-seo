@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Dist (compiled scripts, if you build TS)
+dist/
+
+# Local IDE/editor junk
+.vscode/
+.idea/
+
+# Mac/Linux/Windows junk
+*.swp
+Thumbs.db
