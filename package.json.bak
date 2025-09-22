@@ -6,12 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint",
-    "seed": "tsx scripts/seedServiceLocations.ts",
-    "clear": "tsx scripts/clearServiceLocations.ts"
+    "lint": "eslint"
+    "seed": "ts-node --esm scripts/seedServiceLocations.ts"
   },
   "dependencies": {
-    "dotenv": "^17.2.2",
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
     "next": "15.5.3",
@@ -28,7 +26,6 @@
     "eslint-config-next": "15.5.3",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
 }
