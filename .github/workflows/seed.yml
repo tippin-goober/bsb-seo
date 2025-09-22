@@ -1,0 +1,36 @@
+name: Seed Hygraph
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only (no changes)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: seed-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run seed script
+        run: npm run seed
+        env:
+          NEXT_PUBLIC_HYGRAPH_ENDPOINT: ${{ secrets.HYGRAPH_ENDPOINT }}
+          NEXT_PUBLIC_HYGRAPH_TOKEN: ${{ secrets.HYGRAPH_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
