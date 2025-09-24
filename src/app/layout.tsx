@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
+import Link from "next/link";
+import Navbar from "../components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -58,42 +60,42 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  console.log("Rendering RootLayout");
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${inter.variable} ${poppins.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
         <main className="flex-1">{children}</main>
-        <footer className="bg-gray-100 border-t mt-8">
-          <div className="max-w-6xl mx-auto p-6 grid gap-6 md:grid-cols-3 text-gray-600">
+        <footer className="bg-gray-900 text-gray-300 mt-16">
+          <div className="max-w-6xl mx-auto p-8 grid gap-8 md:grid-cols-3">
             <div>
-              <h3 className="font-semibold mb-2">BSB Tractor Services</h3>
-              <p className="text-sm">
+              <h3 className="text-2xl font-heading font-bold text-white mb-4">BSB Tractor Services</h3>
+              <p className="text-gray-300 leading-relaxed">
                 Professional land clearing, stump grinding, and junk removal
                 serving Volusia County.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Quick Links</h3>
-              <ul className="space-y-1 text-sm">
-                <li><a href="/services" className="hover:underline">Services</a></li>
-                <li><a href="/locations" className="hover:underline">Locations</a></li>
-                <li><a href="/contact" className="hover:underline">Contact</a></li>
+              <h3 className="text-xl font-heading font-semibold text-white mb-4">Quick Links</h3>
+              <ul className="space-y-3">
+                <li><Link href="/services" className="text-gray-300 hover:text-white transition-colors duration-200">Services</Link></li>
+                <li><Link href="/locations" className="text-gray-300 hover:text-white transition-colors duration-200">Locations</Link></li>
+                <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">Contact</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Contact Us</h3>
-              <p className="text-sm">Phone: (321) 283-6902</p>
-              <p className="text-sm">De Leon Springs, FL</p>
+              <h3 className="text-xl font-heading font-semibold text-white mb-4">Contact Us</h3>
+              <p className="text-gray-300 mb-2">Phone: (321) 283-6902</p>
+              <p className="text-gray-300">De Leon Springs, FL</p>
             </div>
           </div>
-          <div className="text-center text-gray-500 text-sm pb-4">
-            © {new Date().getFullYear()} BSB Tractor Services. All rights
-            reserved.
+          <div className="border-t border-gray-800 text-center text-gray-400 py-6">
+            © {new Date().getFullYear()} BSB Tractor Services. All rights reserved.
           </div>
         </footer>
       </body>

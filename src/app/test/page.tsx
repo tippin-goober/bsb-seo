@@ -14,7 +14,7 @@ const query = gql`
 export default async function TestPage() {
   try {
     console.log("Running GraphQL query for services...");
-    const data = await client.request(query);
+    const data = await client.request<{ services: { id: string; name: string; slug: string }[] }>(query);
     console.log("GraphQL response data:", JSON.stringify(data, null, 2));
 
     return (
@@ -22,7 +22,7 @@ export default async function TestPage() {
         <h1 className="text-3xl font-bold mb-6">Services from Hygraph</h1>
         {data.services && data.services.length > 0 ? (
           <ul className="space-y-2">
-            {data.services.map((service: any) => (
+            {data.services.map((service) => (
               <li key={service.id} className="p-4 border rounded-lg bg-gray-50">
                 <div className="font-semibold">{service.name}</div>
                 <div className="text-sm text-gray-600">Slug: {service.slug}</div>
